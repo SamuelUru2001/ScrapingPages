@@ -19,7 +19,6 @@ module.exports =
             while (nextPage) {
 
                 console.log(`URL 21: ${url}`)
-                console.count('pages')
 
                 const enlaceItems = await page.evaluate(() => {
                     const elements = document.querySelectorAll('#searcher .card--with-reviews')
@@ -38,21 +37,18 @@ module.exports =
                     let clickOff = await page.evaluate(() => document.querySelectorAll('.disabledArrow > .rightArrow').length > 0)
                     clickOff ? true : false
 
-                    console.log("#### off click ###", clickOff)
+                    console.log("#### click ###", clickOff)
                     if (clickOff) {
 
-                        console.log("if")
                         console.log("enlace", enlaces)
                         let AllDatas = []
                         for (let i = 0; i < enlaces.length; i++) {
                             // const element = array[i];
                             await page.goto(enlaces[i])
-                            console.log("esperamos 4 segundos")
                             await page.waitForTimeout(4000)
 
                             await page.evaluate(() => document.scrollingElement.scrollBy(0, 1000))
                             await page.waitForTimeout(5000)
-                            console.log("movemos")
 
                             const Datas = await page.evaluate(() => {
 
@@ -87,10 +83,7 @@ module.exports =
                         }
                         break
                     } else {
-                        console.log("off")
-                        console.log("yes todavia ya")
                         await page.waitForTimeout(2000)
-                        console.log("esperamos hacer click")
                         await page.waitForTimeout(3000)
                         await page.click('.rightArrow')
                         await page.waitForTimeout(2000)

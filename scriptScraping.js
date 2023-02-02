@@ -21,7 +21,6 @@ async function extractDatas() {
 
         let allCompanies = []
         while (nextPage) {
-            console.count('Pagina')
 
             console.log('insert jquery...')
             await page.addScriptTag({ path: require.resolve('jquery') })
@@ -64,10 +63,8 @@ async function extractDatas() {
             })
             allCompanies.push(...companiesData)
 
-            // console.log("companies", JSON.stringify(allCompanies))
 
             if (nextPage) {
-                // console.log(urlToScraping)
                 await page.waitForSelector('.arrow.ssproff-right')
                 await page.click('.arrow.ssproff-right')
                 await page.waitForTimeout(2000)
